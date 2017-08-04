@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>xiaopeng</title>
+    <style>
+      html{
+        overflow: hidden!important;
+        height: 100%!important;
+        width: 100%!important;
+      }
+      body{
+        overflow: hidden!important;
+        border-radius: 4px!important;
+        height: 100%!important;
+        width: 100%!important;
+        border:1px solid #2aadf1!important;
+        background:transparent!important;
+
+      }
+    </style>
+    <% if (htmlWebpackPlugin.options.nodeModules) { %>
+      <!-- Add `node_modules/` to global paths so `require` works properly in development -->
+      <script>
+        require('module').globalPaths.push('<%= htmlWebpackPlugin.options.nodeModules.replace(/\\/g, '\\\\') %>')
+      </script>
+    <% } %>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- Set `__static` path to static files in production -->
+    <script>
+      if (process.env.NODE_ENV !== 'development') window.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
+    </script>
+
+    <!-- webpack builds are automatically injected -->
+  </body>
+</html>
